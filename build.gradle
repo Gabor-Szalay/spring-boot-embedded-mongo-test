@@ -1,0 +1,70 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'org.springframework.boot' version '3.1.2'
+    id 'io.freefair.lombok' version '8.0.1'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+group = 'com.gaborszalay.mongodb'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.1.2'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:3.1.2'
+    implementation 'org.springframework.data:spring-data-mongodb:4.1.2'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.1.2'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.2'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.9.2'
+}
+
+springBoot {
+    mainClass = 'com.gaborszalay.mongodb.Application'
+    buildInfo()
+}
+
+bootJar {
+    manifest {
+        attributes(
+                'Implementation-Title': 'MongoDB App',
+                'Implementation-Version': archiveVersion
+        )
+    }
+}
+
+processResources {
+    filesMatching("**/application*.yml") {
+        expand project.properties
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir("$buildDir/generated/src/main/java")
+        }
+    }
+}
+
+tasks.test {
+    useJUnitPlatform {
+    }
+}

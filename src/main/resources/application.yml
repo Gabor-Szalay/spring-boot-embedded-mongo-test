@@ -1,0 +1,15 @@
+server:
+  port: 8090
+  shutdown: GRACEFUL
+
+spring:
+  mongodb:
+    embedded:
+      version: 4.0.0
+
+mongodb:
+  database-name: "bookstore"
+  connection-string: "mongodb://127.0.0.1:27017"
+  username: "test"
+  password: "test"
+

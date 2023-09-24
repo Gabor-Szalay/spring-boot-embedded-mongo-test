@@ -1,0 +1,5 @@
+mongodb:
+  database-name: "bookstore"
+  connection-string: "mongodb://127.0.0.1:27019"
+  username: "test"
+  password: "test"
